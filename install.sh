@@ -53,7 +53,8 @@ print_info() {
 prompt_company_name() {
   local company_name=""
   while [[ -z "$company_name" ]]; do
-    read -r -p "Enter company name (e.g., 'BYREASON LLC'): " company_name
+    # Read from /dev/tty to work when script is piped
+    read -r -p "Enter company name (e.g., 'BYREASON LLC'): " company_name < /dev/tty
     if [[ -z "$company_name" ]]; then
       print_error "Company name is required."
     fi
@@ -64,7 +65,8 @@ prompt_company_name() {
 prompt_target_path() {
   local target_path=""
   while [[ -z "$target_path" ]]; do
-    read -r -p "Enter target directory path (e.g., './my-company-accounting' or '/full/path/to/dir'): " target_path
+    # Read from /dev/tty to work when script is piped
+    read -r -p "Enter target directory path (e.g., './my-company-accounting' or '/full/path/to/dir'): " target_path < /dev/tty
     if [[ -z "$target_path" ]]; then
       print_error "Target path is required."
     fi
@@ -82,7 +84,7 @@ validate_path() {
   # Check if path already exists
   if [[ -e "$path" ]]; then
     print_error "Path already exists: $path"
-    read -r -p "Do you want to overwrite it? (y/N): " confirm
+    read -r -p "Do you want to overwrite it? (y/N): " confirm < /dev/tty
     if [[ "$confirm" =~ ^[Yy]$ ]]; then
       rm -rf "$path"
       print_warning "Removed existing directory: $path"
@@ -95,7 +97,7 @@ validate_path() {
   # Check if parent directory exists
   local parent_dir=$(dirname "$path")
   if [[ ! -d "$parent_dir" ]]; then
-    read -r -p "Parent directory doesn't exist. Create it? (Y/n): " confirm
+    read -r -p "Parent directory doesn't exist. Create it? (Y/n): " confirm < /dev/tty
     if [[ "$confirm" =~ ^[Nn]$ ]]; then
       print_error "Installation cancelled."
       exit 1
