@@ -54,9 +54,11 @@ print_info() {
 prompt_company_name() {
   local company_name=""
   while [[ -z "$company_name" ]]; do
-    read -r -p "Enter company name (e.g., 'BYREASON LLC'): " company_name
+    # Output prompt to stderr so it shows when piped but doesn't get captured
+    echo -n "Enter company name (e.g., 'BYREASON LLC'): " >&2
+    read -r company_name
     if [[ -z "$company_name" ]]; then
-      print_error "Company name is required."
+      print_error "Company name is required." >&2
     fi
   done
   echo "$company_name"
