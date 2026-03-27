@@ -57,14 +57,8 @@ validate_target_path() {
   # Check if path already exists
   if [[ -e "$path" ]]; then
     print_error "Directory already exists: $path"
-    read -r -p "Do you want to overwrite it? (y/N): " confirm
-    if [[ "$confirm" =~ ^[Yy]$ ]]; then
-      rm -rf "$path"
-      print_warning "Removed existing directory: $path"
-    else
-      print_error "Installation cancelled."
-      exit 1
-    fi
+    print_info "Remove it first with: rm -rf $path"
+    exit 1
   fi
 }
 
