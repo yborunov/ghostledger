@@ -33,6 +33,23 @@ This repository is country-agnostic at the bookkeeping layer and supports countr
 6. Update `main.ledger` includes.
 7. Validate books and generate reports.
 
+## Updating from Boilerplate
+
+To pull the latest boilerplate updates into your working repository:
+
+```bash
+curl -sL https://raw.githubusercontent.com/yborunov/GhostLedger/main/update.sh | bash
+```
+
+This command downloads and runs the update script which will:
+- Create `.bak` backups of any files it modifies
+- Update boilerplate core files (skills, docs, templates)
+- Auto-replace `<COMPANY_NAME>` and `<YEAR>` placeholders with your detected values
+- Add any new files from the latest boilerplate
+- **Never touch your transaction data, reports, or actual ledger entries**
+
+After updating, review any `.bak` files if you need to restore previous versions.
+
 ## Core Commands
 
 Validate books:
