@@ -32,10 +32,14 @@ Recommended: let Claude Code, Codex, or another coding agent perform setup for y
 Use a prompt like:
 
 ```text
-You are in the GhostLedger boilerplate repository.
-Set up a new working repo using install.sh.
-Use defaults where safe, explain each step briefly, and stop only if a destructive choice is required.
+Install this GhostLedger https://github.com/yborunov/ghostledger into a new repo for my company.
 ```
+
+Alternatively, execute this command in a terminal:
+```
+curl -sL https://raw.githubusercontent.com/yborunov/GhostLedger/main/install.sh | bash
+```
+
 
 The setup flow will:
 - Prompt for your company name
@@ -44,14 +48,19 @@ The setup flow will:
 - Download and set up the boilerplate with current year
 - Replace all placeholders automatically
 
-## Quick Start (AI-first)
+## Quick Start
 
-1. Open the repository root in your coding agent.
-2. Tell it this is a boilerplate template and placeholders must stay unchanged unless you explicitly ask to instantiate.
-3. Ask it to process source documents into normalized entries under `imports/<YEAR>/`.
-4. Ask it to keep `main.ledger` include statements in sync.
-5. Ask it to run ledger validation and generate required reports.
+1. Upload receipts / invoices to `transaction-imports/`
+2. Open the repository root in your coding agent (Claude Code, Codex, Pi).
+2. Ask you agent:
+```
+import transactions into the ledger and generate balance sheet and P&L statement for the year
+```
 
+```
+```
+```
+```
 ## Updating from Boilerplate
 
 Use your coding agent to run `update.sh` and summarize changed files.
@@ -59,9 +68,14 @@ Use your coding agent to run `update.sh` and summarize changed files.
 Prompt template:
 
 ```text
-Run the GhostLedger boilerplate updater in this repo.
-Keep user data paths untouched, report what changed, and list any .bak files created.
+Update this repo from the latest GhostLedger boilerplate and summarize changes.
 ```
+
+Alternatively, run this command from your working directory in terminal:
+```
+curl -sL https://raw.githubusercontent.com/yborunov/GhostLedger/main/update.sh | bash
+```
+
 
 The updater will:
 - Create `.bak` backups of any files it modifies
@@ -74,41 +88,22 @@ After updating, review any `.bak` files if you need to restore previous versions
 
 ## Prompting Guide for Claude Code / Codex
 
-Use prompts that describe goals, constraints, and expected outputs. Keep the agent operating from repo root.
+Keep prompts minimal. Agents should read repository docs and skill files for the full workflow.
 
-Bookkeeping prompt template:
-
-```text
-Use this GhostLedger repo to process bookkeeping for <YEAR>.
-Inputs are in transaction-imports/<YEAR>/ and expenses/<YEAR>/.
-Create or update normalized journals in imports/<YEAR>/.
-Ensure main.ledger includes every normalized journal file.
-Validate the books, then produce P&L and balance sheet outputs for <period>.
-Return: files changed, totals, and unresolved assumptions.
-```
-
-Year-close prompt template:
+Day-to-day prompt examples:
 
 ```text
-Perform a year-close pass for <YEAR> in this GhostLedger repo.
-Check journal completeness, run ledger validation, and prepare year-end reports in reports/<YEAR>/.
-Call out classification risks, missing source docs, and next actions.
+Generate a balance sheet for <period>.
 ```
-
-Tax working-paper prompt template:
 
 ```text
-Create draft tax working papers for <COUNTRY> for <YEAR> using this GhostLedger repo.
-Use books from main.ledger, keep assumptions explicit, and write outputs under tax/<YEAR>/.
-Include line mappings, supporting schedules, and advisor handoff notes.
-Return open compliance questions clearly.
+Generate the reports I need for <period> from this ledger.
 ```
 
-## Tax and Compliance
+```text
+Add these new transactions to the books and update reports.
+```
 
-- Use `tax/<YEAR>/` for annual tax return working papers.
-- Use skill files under `skills/` to drive repeatable workflows for specific jurisdictions (US, Canada, etc.).
-- Keep all filings and calculations as draft until reviewed by a qualified local professional.
 
 ## Notes
 

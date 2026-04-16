@@ -139,20 +139,37 @@
       </section>
 
       <section class="panel">
-        <h2>Install</h2>
-        <p>Run this command to create a new working repository:</p>
-        <pre><code>curl -sL https://raw.githubusercontent.com/yborunov/ghostledger/main/install.sh | bash</code></pre>
+        <h2>Installation</h2>
         <p>
-          The installer checks for <code>ledger</code> first and tries to auto-install it on
-          supported systems.
+          Recommended: let Claude Code, Codex, or another coding agent perform setup for
+          you.
         </p>
+        <p>Use a prompt like:</p>
+        <pre><code>Install this GhostLedger https://github.com/yborunov/ghostledger into a new repo for my company.</code></pre>
+        <p>Alternatively, execute this command in a terminal:</p>
+        <pre><code>curl -sL https://raw.githubusercontent.com/yborunov/GhostLedger/main/install.sh | bash</code></pre>
+        <p>The setup flow will:</p>
+        <ul>
+          <li>Prompt for your company name.</li>
+          <li>Prompt for target directory path.</li>
+          <li>
+            Verify Ledger CLI is installed (and try auto-install on supported systems).
+          </li>
+          <li>Download and set up the boilerplate with current year.</li>
+          <li>Replace all placeholders automatically.</li>
+        </ul>
       </section>
 
       <section class="panel">
-        <h2>Verify Setup</h2>
-        <pre><code>ledger --version
-ledger -f main.ledger bal
-ledger -f main.ledger reg</code></pre>
+        <h2>Quick Start</h2>
+        <ol>
+          <li>Upload receipts / invoices to <code>transaction-imports/</code>.</li>
+          <li>
+            Open the repository root in your coding agent (Claude Code, Codex, Pi).
+          </li>
+          <li>Ask your agent:</li>
+        </ol>
+        <pre><code>import transactions into the ledger and generate balance sheet and P&amp;L statement for the year</code></pre>
       </section>
 
       <section class="panel">

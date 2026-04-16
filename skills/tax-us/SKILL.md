@@ -36,17 +36,6 @@ If any input is missing, use best-known defaults and document assumptions.
 - Produce year-end balance sheet totals.
 - Flag unresolved classification or compliance assumptions.
 
-## Prompt Pattern
-
-Use this with Claude Code, Codex, or similar agents:
-
-```text
-Prepare a draft US corporate tax package for <YEAR> from this GhostLedger repo.
-Treat main.ledger as source of truth, validate books integrity, and generate requested period totals.
-Create/update tax/<YEAR>/ working papers (draft return, line mappings, supporting schedules, advisor handoff).
-Return files changed, key mappings, and open compliance questions.
-```
-
 ## Suggested US Working Papers
 
 - `tax/<YEAR>/form-1120-draft.md`

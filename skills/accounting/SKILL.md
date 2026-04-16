@@ -35,8 +35,6 @@ Maintain plain-text books and generate financial statements from `main.ledger`.
 - Produce Balance Sheet totals as of the requested date.
 - Document any assumptions or unresolved mappings.
 
-When driving this workflow from Claude Code, Codex, or another agent, use prompts that ask for objectives and output contracts (not shell steps).
-
 ## Output Contract
 
 For a requested period/year, return:
