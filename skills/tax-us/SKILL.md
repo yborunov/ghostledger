@@ -23,18 +23,28 @@ If any input is missing, use best-known defaults and document assumptions.
 ## Standard Workflow
 
 1. Ensure all source transactions are reflected in `imports/<YEAR>/` and included by `main.ledger`.
-2. Validate books integrity with ledger commands.
+2. Validate books integrity using `main.ledger` as source of truth.
 3. Generate income statement and year-end balance sheet figures.
 4. Create/update US working papers under `tax/<YEAR>/`.
 5. Keep working paper totals synchronized with the books.
 
-## Validation Commands
+## Validation Objectives
 
-```bash
-ledger -f main.ledger bal
-ledger -f main.ledger reg --period "from <YEAR>-01-01 to <YEAR>-12-31"
-ledger -f main.ledger bal Income Expenses --period "from <start> to <end>"
-ledger -f main.ledger bal Assets Liabilities Equity --period "to <next-year>-01-01"
+- Confirm global books balance.
+- Review register activity for the full filing year.
+- Produce requested-period P&L totals.
+- Produce year-end balance sheet totals.
+- Flag unresolved classification or compliance assumptions.
+
+## Prompt Pattern
+
+Use this with Claude Code, Codex, or similar agents:
+
+```text
+Prepare a draft US corporate tax package for <YEAR> from this GhostLedger repo.
+Treat main.ledger as source of truth, validate books integrity, and generate requested period totals.
+Create/update tax/<YEAR>/ working papers (draft return, line mappings, supporting schedules, advisor handoff).
+Return files changed, key mappings, and open compliance questions.
 ```
 
 ## Suggested US Working Papers

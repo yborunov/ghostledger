@@ -24,31 +24,18 @@ Maintain plain-text books and generate financial statements from `main.ledger`.
 1. Review raw source files in `transaction-imports/<YEAR>/` and `expenses/<YEAR>/`.
 2. Convert to normalized entries in `imports/<YEAR>/*.ledger`.
 3. Update `main.ledger` include statements if needed.
-4. Run ledger validation commands.
+4. Run ledger validation checks.
 5. Generate financial reports into `reports/<YEAR>/`.
 
-## Validation Commands
+## Validation and Reporting Objectives
 
-```bash
-ledger -f main.ledger bal
-ledger -f main.ledger reg
-```
+- Confirm global books balance from `main.ledger`.
+- Review register activity for the requested period.
+- Produce Profit and Loss totals for the requested period.
+- Produce Balance Sheet totals as of the requested date.
+- Document any assumptions or unresolved mappings.
 
-Books must balance to zero globally.
-
-## Financial Statements
-
-Profit and Loss:
-
-```bash
-ledger -f main.ledger bal Income Expenses --period "from <start> to <end>"
-```
-
-Balance Sheet:
-
-```bash
-ledger -f main.ledger bal Assets Liabilities Equity --period "to <as-of-date>"
-```
+When driving this workflow from Claude Code, Codex, or another agent, use prompts that ask for objectives and output contracts (not shell steps).
 
 ## Output Contract
 

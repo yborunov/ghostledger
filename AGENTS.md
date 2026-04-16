@@ -10,14 +10,13 @@ This repo is a GhostLedger **boilerplate template**, not a company-specific ledg
 - Canonical normalized journals expected by the template are `imports/<YEAR>/bank.ledger`, `imports/<YEAR>/card.ledger`, `imports/<YEAR>/invoices.ledger`.
 - If you add a new normalized journal file, also update `main.ledger` include statements or Ledger CLI will ignore it.
 
-## Commands (actual repo source of truth)
+## Agent execution goals
 
-- Validate ledger structure: `ledger -f main.ledger bal`
-- Inspect postings register: `ledger -f main.ledger reg`
-- Verify Ledger CLI is installed: `ledger --version`
-- Year register slice: `ledger -f main.ledger reg --period "from <YEAR>-01-01 to <YEAR>-12-31"`
-- P&L: `ledger -f main.ledger bal Income Expenses --period "from <start> to <end>"`
-- Balance sheet: `ledger -f main.ledger bal Assets Liabilities Equity --period "to <next-year>-01-01"`
+- Use `main.ledger` as the only execution entrypoint for checks and reports.
+- Validate global book integrity before generating any reporting output.
+- Review period register activity when reconciling or classifying transactions.
+- Produce P&L totals for requested periods and balance sheet totals as of requested dates.
+- Report unresolved assumptions, missing evidence, and classification risk items.
 
 ## Directory intent (do not mix)
 
