@@ -4,6 +4,8 @@ Reusable plain-text accounting boilerplate for any company.
 
 This repository is country-agnostic at the bookkeeping layer and supports country-specific tax workflows via dedicated skills.
 
+GhostLedger depends on Ledger CLI (`ledger`): https://github.com/ledger/ledger
+
 ## Purpose
 
 - Keep books in double-entry plain-text journals.
@@ -28,12 +30,13 @@ This repository is country-agnostic at the bookkeeping layer and supports countr
 Create a new working repository with one command:
 
 ```bash
-curl -sL https://raw.githubusercontent.com/yborunov/GhostLedger/main/install.sh | bash
+curl -sL https://raw.githubusercontent.com/yborunov/ghostledger/main/install.sh | bash
 ```
 
 This will:
 - Prompt for your company name
 - Prompt for target directory path
+- Verify Ledger CLI is installed (and try auto-install on supported systems)
 - Download and set up the boilerplate with current year
 - Replace all placeholders automatically
 
@@ -54,7 +57,7 @@ If you prefer manual setup:
 To pull the latest boilerplate updates into your working repository:
 
 ```bash
-curl -sL https://raw.githubusercontent.com/yborunov/GhostLedger/main/update.sh | bash
+curl -sL https://raw.githubusercontent.com/yborunov/ghostledger/main/update.sh | bash
 ```
 
 This command downloads and runs the update script which will:
@@ -71,6 +74,7 @@ After updating, review any `.bak` files if you need to restore previous versions
 Validate books:
 
 ```bash
+ledger --version
 ledger -f main.ledger bal
 ledger -f main.ledger reg
 ```

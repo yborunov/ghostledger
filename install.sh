@@ -1,15 +1,16 @@
 #!/bin/bash
 
 # GhostLedger Boilerplate Install Script
-# Usage: curl -sL https://raw.githubusercontent.com/yborunov/GhostLedger/main/install.sh | bash
+# Usage: curl -sL https://raw.githubusercontent.com/yborunov/ghostledger/main/install.sh | bash
 #
 # This script creates a new working repository from the GhostLedger boilerplate.
 # It downloads the latest boilerplate, prompts for configuration, and sets up the working directory.
 
 set -e
 
-BOILERPLATE_URL="https://github.com/yborunov/GhostLedger"
+BOILERPLATE_URL="https://github.com/yborunov/ghostledger"
 BOILERPLATE_REF="main"
+LEDGER_CLI_URL="https://github.com/ledger/ledger"
 TEMP_DIR=$(mktemp -d)
 CURRENT_YEAR=$(date +%Y)
 INVOCATION_DIR=$(pwd -P)
@@ -49,6 +50,58 @@ print_error() {
 
 print_info() {
   echo -e "${CYAN}ℹ${NC} $1"
+}
+
+ensure_ledger_cli() {
+  if command -v ledger &> /dev/null; then
+    local version
+    version=$(ledger --version 2>/dev/null | awk 'NR==1 {print; exit}')
+    print_success "Ledger CLI found${version:+: $version}"
+    return 0
+  fi
+
+  print_warning "Ledger CLI not found. GhostLedger requires Ledger CLI."
+  print_info "Project: ${LEDGER_CLI_URL}"
+
+  if [[ "$OSTYPE" == "darwin"* ]] && command -v brew &> /dev/null; then
+    print_info "Installing Ledger CLI via Homebrew..."
+    if brew install ledger; then
+      print_success "Installed Ledger CLI via Homebrew"
+    else
+      print_error "Failed to install Ledger CLI via Homebrew."
+      exit 1
+    fi
+  elif command -v apt-get &> /dev/null; then
+    print_info "Installing Ledger CLI via apt-get..."
+    if command -v sudo &> /dev/null; then
+      if sudo apt-get update && sudo apt-get install -y ledger; then
+        print_success "Installed Ledger CLI via apt-get"
+      else
+        print_error "Failed to install Ledger CLI via apt-get."
+        exit 1
+      fi
+    else
+      if apt-get update && apt-get install -y ledger; then
+        print_success "Installed Ledger CLI via apt-get"
+      else
+        print_error "Failed to install Ledger CLI via apt-get."
+        exit 1
+      fi
+    fi
+  else
+    print_error "Could not auto-install Ledger CLI."
+    print_info "Install it manually, then rerun this installer: ${LEDGER_CLI_URL}"
+    exit 1
+  fi
+
+  if ! command -v ledger &> /dev/null; then
+    print_error "Ledger CLI still not available after installation attempt."
+    exit 1
+  fi
+
+  local installed_version
+  installed_version=$(ledger --version 2>/dev/null | awk 'NR==1 {print; exit}')
+  print_success "Ledger CLI ready${installed_version:+: $installed_version}"
 }
 
 validate_target_path() {
@@ -197,7 +250,7 @@ print_next_steps() {
   echo "  5. Update main.ledger with your bank/card file names"
   echo ""
   echo "To pull updates from the boilerplate later, run:"
-  echo -e "  ${CYAN}curl -sL https://raw.githubusercontent.com/yborunov/GhostLedger/main/update.sh | bash${NC}"
+  echo -e "  ${CYAN}curl -sL https://raw.githubusercontent.com/yborunov/ghostledger/main/update.sh | bash${NC}"
   echo ""
   echo "For help, see the README.md in your working directory."
 }
@@ -210,6 +263,8 @@ main() {
     print_error "Neither curl nor wget is installed. Please install one of them."
     exit 1
   fi
+
+  ensure_ledger_cli
   
   # Configuration
   echo "Configuration"

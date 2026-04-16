@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # GhostLedger Boilerplate Update Script
-# Usage: curl -sL https://raw.githubusercontent.com/yborunov/GhostLedger/main/update.sh | bash
+# Usage: curl -sL https://raw.githubusercontent.com/yborunov/ghostledger/main/update.sh | bash
 #
 # This script updates a working repository from the GhostLedger boilerplate.
 # It creates backups, auto-replaces placeholders, and preserves user data.
 
 set -e
 
-BOILERPLATE_URL="https://github.com/yborunov/GhostLedger"
+BOILERPLATE_URL="https://github.com/yborunov/ghostledger"
 BOILERPLATE_REF="main"
 TEMP_DIR=$(mktemp -d)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
