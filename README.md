@@ -59,12 +59,10 @@ Generate a balance sheet for <period>.
 Generate the reports I need for <period> from this ledger.
 ```
 
-```text
+```
 Add these new transactions to the books and update reports.
 ```
-```
 
-```
 ## Updating GhostLedger
 
 Use your coding agent to run `update.sh` and summarize changed files.
