@@ -1,8 +1,6 @@
 # GhostLedger
 
-Reusable plain-text accounting boilerplate for any company.
-
-This repository is country-agnostic at the bookkeeping layer and supports country-specific tax workflows via dedicated skills.
+Reusable double-entry plain-text accounting AI skill to manage books for any company.
 
 GhostLedger depends on Ledger CLI (`ledger`): https://github.com/ledger/ledger
 
