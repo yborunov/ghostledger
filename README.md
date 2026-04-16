@@ -18,7 +18,7 @@ Recommended: let Claude Code, Codex, or another coding agent perform setup for y
 Use a prompt like:
 
 ```text
-Install this GhostLedger https://github.com/yborunov/ghostledger into a new repo for my company.
+Install GhostLedger https://github.com/yborunov/ghostledger into a new repo for my company.
 ```
 
 Alternatively, execute this command in a terminal:
