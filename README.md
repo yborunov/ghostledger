@@ -13,18 +13,6 @@ GhostLedger depends on Ledger CLI (`ledger`): https://github.com/ledger/ledger
 - Generate financial reports from one source of truth.
 - Keep tax/compliance working papers organized by country and year.
 
-## Repository Structure
-
-- `main.ledger` - root ledger file with `include` statements.
-- `imports/<YEAR>/` - normalized `.ledger` files.
-- `transaction-imports/<YEAR>/` - raw CSV/XLS exports from banks/providers.
-- `expenses/<YEAR>/` - invoices and receipts.
-- `reports/<YEAR>/` - generated P&L, balance sheet, and working notes.
-- `tax/<YEAR>/` - annual tax/compliance working papers.
-- `skills/accounting/SKILL.md` - global bookkeeping workflow.
-- `skills/tax-us/SKILL.md` - US tax workflow and form mapping.
-- `skills/tax-ca/SKILL.md` - Canada tax workflow and form mapping.
-
 ## Installation
 
 Recommended: let Claude Code, Codex, or another coding agent perform setup for you.
@@ -57,35 +45,6 @@ The setup flow will:
 import transactions into the ledger and generate balance sheet and P&L statement for the year
 ```
 
-```
-```
-```
-```
-## Updating from Boilerplate
-
-Use your coding agent to run `update.sh` and summarize changed files.
-
-Prompt template:
-
-```text
-Update this repo from the latest GhostLedger boilerplate and summarize changes.
-```
-
-Alternatively, run this command from your working directory in terminal:
-```
-curl -sL https://raw.githubusercontent.com/yborunov/GhostLedger/main/update.sh | bash
-```
-
-
-The updater will:
-- Create `.bak` backups of any files it modifies
-- Update boilerplate core files (skills, docs, templates)
-- Auto-replace `<COMPANY_NAME>` and `<YEAR>` placeholders with your detected values
-- Add any new files from the latest boilerplate
-- **Never touch your transaction data, reports, or actual ledger entries**
-
-After updating, review any `.bak` files if you need to restore previous versions.
-
 ## Prompting Guide for Claude Code / Codex
 
 Keep prompts minimal. Agents should read repository docs and skill files for the full workflow.
@@ -103,7 +62,44 @@ Generate the reports I need for <period> from this ledger.
 ```text
 Add these new transactions to the books and update reports.
 ```
+```
 
+```
+## Updating GhostLedger
+
+Use your coding agent to run `update.sh` and summarize changed files.
+
+Prompt template:
+
+```text
+Update this repo from the latest GhostLedger boilerplate and summarize changes.
+```
+
+Alternatively, run this command from your working directory in terminal:
+```
+curl -sL https://raw.githubusercontent.com/yborunov/GhostLedger/main/update.sh | bash
+```
+
+The updater will:
+- Create `.bak` backups of any files it modifies
+- Update boilerplate core files (skills, docs, templates)
+- Auto-replace `<COMPANY_NAME>` and `<YEAR>` placeholders with your detected values
+- Add any new files from the latest boilerplate
+- **Never touch your transaction data, reports, or actual ledger entries**
+
+After updating, review any `.bak` files if you need to restore previous versions.
+
+## Repository Structure
+
+- `main.ledger` - root ledger file with `include` statements.
+- `imports/<YEAR>/` - normalized `.ledger` files.
+- `transaction-imports/<YEAR>/` - raw CSV/XLS exports from banks/providers.
+- `expenses/<YEAR>/` - invoices and receipts.
+- `reports/<YEAR>/` - generated P&L, balance sheet, and working notes.
+- `tax/<YEAR>/` - annual tax/compliance working papers.
+- `skills/accounting/SKILL.md` - global bookkeeping workflow.
+- `skills/tax-us/SKILL.md` - US tax workflow and form mapping.
+- `skills/tax-ca/SKILL.md` - Canada tax workflow and form mapping.
 
 ## Notes
 
