@@ -25,7 +25,7 @@ Install this GhostLedger https://github.com/yborunov/ghostledger into a new repo
 
 Alternatively, execute this command in a terminal:
 ```
-curl -sL https://raw.githubusercontent.com/yborunov/GhostLedger/main/install.sh | bash
+curl -sL https://raw.githubusercontent.com/yborunov/ghostledger/main/install.sh | bash
 ```
 
 
@@ -75,7 +75,7 @@ Update this repo from the latest GhostLedger boilerplate and summarize changes.
 
 Alternatively, run this command from your working directory in terminal:
 ```
-curl -sL https://raw.githubusercontent.com/yborunov/GhostLedger/main/update.sh | bash
+curl -sL https://raw.githubusercontent.com/yborunov/ghostledger/main/update.sh | bash
 ```
 
 The updater will:
